@@ -99,12 +99,10 @@ async function verifyData(dados) {
 }
 
 async function startMonitoring() {
-  setInterval(async () => {
-    const liveScores = await getLiveScores();
-    if (liveScores) {
-      verifyData(liveScores);
-    }
-  }, 60000);
+  const liveScores = await getLiveScores();
+  if (liveScores) {
+    verifyData(liveScores);
+  }
 }
 
-startMonitoring();
+setInterval(startMonitoring, 60000);
