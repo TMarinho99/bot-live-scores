@@ -10,6 +10,7 @@ const chatId = "-966239716";
 const bot = new TelegramBot(TOKEN_BOT, { polling: true });
 
 bot.sendMessage(chatId, "⚽️Iniciando bot🎯");
+console.log("Bot Iniciado");
 
 async function getLiveScores() {
   try {
@@ -71,6 +72,7 @@ async function verifyData(dados) {
         currentTimeInMinutes >= 10 &&
         currentTimeInMinutes <= 20
       ) {
+        console.log("Jogo Enviado");
         const message = `⚽️ <b>JOGO OVER 0.5 HT</b>
       
           🆚 <b>${homeTeamName} x ${awayTeamName}</b>
@@ -101,6 +103,7 @@ async function verifyData(dados) {
 async function startMonitoring() {
   const liveScores = await getLiveScores();
   if (liveScores) {
+    console.log("Verificando");
     verifyData(liveScores);
   }
 }
