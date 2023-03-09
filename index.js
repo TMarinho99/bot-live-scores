@@ -4,8 +4,8 @@ require("dotenv").config();
 
 const processedGames = new Set();
 
-const TOKEN_BOT = process.env.TOKEN_TELEGRAM;
-const chatId = process.env.CHAT_ID;
+const TOKEN_BOT = "6135800772:AAEOgjbLgiT2y5If-ILh1Nq-aLfBUbFgzeo";
+const chatId = "966239716";
 
 const bot = new TelegramBot(TOKEN_BOT, { polling: true });
 
@@ -104,7 +104,7 @@ async function startMonitoring() {
     if (liveScores) {
       verifyData(liveScores);
     }
-  }, process.env.TIME_REFRESH);
+  }, 60000);
 }
 
 startMonitoring();
