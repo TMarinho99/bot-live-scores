@@ -5,7 +5,7 @@ require("dotenv").config();
 const processedGames = new Set();
 
 const TOKEN_BOT = "6135800772:AAEOgjbLgiT2y5If-ILh1Nq-aLfBUbFgzeo";
-const chatId = "966239716";
+const chatId = "-966239716";
 
 const bot = new TelegramBot(TOKEN_BOT, { polling: true });
 
