@@ -45,22 +45,24 @@ async function verifyData(dados) {
         probabilities,
       } = game;
 
-      const homeTeamName = homeTeam?.name || "N/A";
-      const awayTeamName = awayTeam?.name || "N/A";
-      const leagueName = league?.name || "N/A";
-      const currentTimeInMinutes = currentTime?.minute || 0;
-      const homeTeamScore = scores?.homeTeamScore || 1;
-      const awayTeamScore = scores?.awayTeamScore || 1;
-      const cornersHome = stats?.corners?.home || 0;
-      const cornersAway = stats?.corners?.away || 0;
-      const dangerousAttacksHome = stats?.dangerousAttacks?.home || 0;
-      const dangerousAttacksAway = stats?.dangerousAttacks?.away || 0;
-      const shotsOffGoalHome = stats?.shotsOffgoal?.home || 0;
-      const shotsOffGoalAway = stats?.shotsOffgoal?.away || 0;
-      const shotsOnGoalHome = stats?.shotsOngoal?.home || 0;
-      const shotsOnGoalAway = stats?.shotsOngoal?.away || 0;
-      const over05HTProbability = probabilities?.HT_over_0_5 || 0;
-      const over25Probability = probabilities?.over_2_5 || 0;
+      console.log(fixtureId);
+
+      const homeTeamName = homeTeam?.name;
+      const awayTeamName = awayTeam?.name;
+      const leagueName = league?.name;
+      const currentTimeInMinutes = currentTime?.minute;
+      const homeTeamScore = scores?.homeTeamScore;
+      const awayTeamScore = scores?.awayTeamScore;
+      const cornersHome = stats?.corners?.home;
+      const cornersAway = stats?.corners?.away;
+      const dangerousAttacksHome = stats?.dangerousAttacks?.home;
+      const dangerousAttacksAway = stats?.dangerousAttacks?.away;
+      const shotsOffGoalHome = stats?.shotsOffgoal?.home;
+      const shotsOffGoalAway = stats?.shotsOffgoal?.away;
+      const shotsOnGoalHome = stats?.shotsOngoal?.home;
+      const shotsOnGoalAway = stats?.shotsOngoal?.away;
+      const over05HTProbability = probabilities?.HT_over_0_5;
+      const over25Probability = probabilities?.over_2_5;
 
       const homeTeamNameForUrl = homeTeamName.replace(" ", "+");
       const link = `https://www.bet365.com/#/AX/K%5E${homeTeamNameForUrl}/`;
@@ -72,8 +74,8 @@ async function verifyData(dados) {
         currentTimeInMinutes >= 10 &&
         currentTimeInMinutes <= 20
       ) {
-        console.log("Jogo Enviado");
-        const message = `⚽️ <b>JOGO OVER 0.5 HT</b>
+      console.log("Jogo Enviado");
+      const message = `⚽️ <b>JOGO OVER 0.5 HT</b>
       
           🆚 <b>${homeTeamName} x ${awayTeamName}</b>
           🏆 ${leagueName}
@@ -93,8 +95,8 @@ async function verifyData(dados) {
             
           ANALISE A PARTIDA ANTES DE FAZER A ENTRADA !!!`;
 
-        bot.sendMessage(chatId, message, { parse_mode: "HTML" });
-        processedGames.add(fixtureId);
+      bot.sendMessage(chatId, message, { parse_mode: "HTML" });
+      processedGames.add(fixtureId);
       }
     }
   });
@@ -103,9 +105,10 @@ async function verifyData(dados) {
 async function startMonitoring() {
   const liveScores = await getLiveScores();
   if (liveScores) {
+    console.log("Analisando ", liveScores.total, " jogos");
     console.log("Verificando");
     verifyData(liveScores);
   }
 }
 
-setInterval(startMonitoring, 60000);
+setInterval(startMonitoring, 15000);
